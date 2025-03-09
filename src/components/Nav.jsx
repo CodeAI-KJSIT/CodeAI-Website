@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logo from "/Group.png";
+import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
 
 const menuItems = [
   { href: "/", label: "HOME" },
   { href: "/about", label: "ABOUT US" },
-  // { href: "/event", label: "EVENT" },
   { href: "/teams", label: "TEAM" },
 ];
 
@@ -43,9 +43,11 @@ const menuItemVariants = {
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation(); // Get current path
+  const currentPath = location.pathname;
 
   return (
-    <nav className="fixed top-0 w-screen z-50 bg-opacity-90 bg-[#0A0118] text-white backdrop-blur-sm">
+    <nav className="fixed top-0 w-full z-50 bg-opacity-90 bg-[#04021a] text-white backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-8 py-5 sm:px-8 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <motion.div
@@ -56,7 +58,7 @@ const Nav = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <div className="h-12 w-20 ">
+            <div className="h-12 w-20 py-5">
               <img src={logo} alt="Logo" className="h-8" />
             </div>
           </motion.div>
@@ -71,7 +73,9 @@ const Nav = () => {
                 >
                   <motion.a
                     href={item.href}
-                    className="font-custom px-4 py-2 border-2 border-transparent text-xs hover:border-white rounded-full transition-all cursor-pointer"
+                    className={`font-custom px-4 py-2 border-2 
+                      ${item.href === currentPath ? 'border-[#EC27D5]' : 'border-transparent'} 
+                      text-xs hover:border-white rounded-full transition-all cursor-pointer`}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -91,9 +95,9 @@ const Nav = () => {
           >
             Join Us
           </motion.button>
-          <div className="h-12  md:hidden">
+          <div className="h-12 py-1 md:hidden">
             <motion.button
-              className="md:hidden  text-white p-1  rounded-md"
+              className="md:hidden text-white p-5 rounded-md"
               onClick={() => setIsOpen(!isOpen)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -110,18 +114,20 @@ const Nav = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 top-24 bg-[#0A0118] bg-opacity-95 backdrop-blur-lg md:hidden font-custom"
+            className="fixed inset-0 top-24 bg-[#04021a] bg-opacity-95 backdrop-blur-lg md:hidden font-custom"
             initial="closed"
             animate="open"
             exit="closed"
             variants={menuVariants}
           >
-            <div className="flex flex-col  bg-[#0A0118] h-screen items-center  space-y-8 pt-32">
+            <div className="flex flex-col bg-[#04021a] h-screen items-center space-y-8">
               {menuItems.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="text-gray-300 hover:text-white text-[0.9rem] px-4 py-2 rounded-full w-[80%] z-1000 text-center"
+                  className={`text-gray-300 hover:text-white text-[0.9rem] px-4 py-2 
+                    ${item.href === currentPath ? 'text-white border border-[#EC27D5]' : ''}
+                    rounded-full w-[80%] z-1000 text-center`}
                   variants={menuItemVariants}
                   custom={index}
                   onClick={() => setIsOpen(false)}
