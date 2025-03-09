@@ -1,4 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
+import crown from "/crown.png";
+import lines from "/lines.png";
+import excla from "/excla.png";
 import TeamSection from "../components/TeamSection";
 import Carousel from "../components/Carousel";
 import Nav from "../components/Nav";
@@ -111,12 +115,33 @@ const App = () => {
   ];
 
   return (
-    <div id="team" className="bg-[#090119] text-white font-custom">
+    <div id="team" className="bg-[#04021B] text-white font-custom">
       <Nav />
 
-      <div className="text-center h-[80vh] flex flex-col justify-center mt-[10vw]">
+      <div className="text-center h-[80vh] flex flex-col justify-center mt-[10vw] relative">
+        <span className="absolute ml-[12vw] mb-[36vh] lg:ml-[33vw] lg:mb-[36vh]">
+          <img
+            src={crown}
+            alt="crown"
+            className="h-[5vh] lg:h-[8vh] md:h-[6vh]"
+          />
+        </span>
+
         <h1 className="text-4xl font-bold mt-32">BRAINS BEHIND</h1>
-        <h1 className="text-4xl font-bold mt-4">THE CODE</h1>
+        <h1 className="text-4xl font-bold mt-8">THE CODE</h1>
+        
+        <img
+          src={lines}
+          alt="lines"
+          className="absolute inline-block h-[4vh] lg:h-[5vh] right-[1vw] lg:right-[38vw] top-[33vh] lg:top-[30vh]"
+        />
+
+        <img
+          src={excla}
+          alt="exclamation mark"
+          className="absolute h-[6vh] lg:h-[7vh] right-[14vw] lg:right-[41vw] bottom-[8vh] lg:bottom-[7vh]"
+        />
+
         <p className="text-xl font-custom3 mt-64">
           Be greater, be greater together
         </p>
